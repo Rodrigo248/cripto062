@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Clientes</title>
+    <style>
+        /* Fuente elegante y limpia */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        /* Estilo de la tabla */
+        table {
+            width: 90%;
+            margin: auto;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 14px 16px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4a90e2;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #e3f2fd;
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            tr {
+                margin-bottom: 15px;
+                border-bottom: 1px solid #ddd;
+            }
+
+            td {
+                position: relative;
+                padding-left: 50%;
+                text-align: right;
+            }
+
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 16px;
+                top: 14px;
+                font-weight: bold;
+                color: #555;
+                text-align: left;
+            }
+
+            th {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Listado de Clientes</h1>
+    <table id="tablaClientes">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
+                <th>Nombre</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        let token = getCookie("token");
+        console.log(token);
+
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch("clientes?token=" + encodeURIComponent(token))
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Error al obtener los clientes");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const tbody = document.querySelector("#tablaClientes tbody");
+                    tbody.innerHTML = "";
+                    data.forEach(cliente => {
+                        const fila = document.createElement("tr");
+                        fila.innerHTML = `
+                            <td data-label="Código">${cliente.codiClie}</td>
+                            <td data-label="Apellido Paterno">${cliente.appaClie}</td>
+                            <td data-label="Apellido Materno">${cliente.apmaClie}</td>
+                            <td data-label="Nombre">${cliente.nombClie}</td>
+                        `;
+                        tbody.appendChild(fila);
+                    });
+                })
+                .catch(error => {
+                    console.error("Error al cargar clientes:", error);
+                });
+        });
+
+        function getCookie(nombre) {
+            const nombreEQ = nombre + "=";
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                let c = cookies[i].trim();
+                if (c.indexOf(nombreEQ) === 0) {
+                    return c.substring(nombreEQ.length, c.length);
+                }
+            }
+            return null;
+        }
+    </script>
+</body>
+</html>
