@@ -13,8 +13,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import utils.HashUtil;
 
 /**
  *
@@ -25,11 +28,15 @@ public class UsuarioJpaController implements Serializable {
     public UsuarioJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    private EntityManagerFactory emf = null;
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.mycompany_Cripto062_war_1.0-SNAPSHOTPU");
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
+
+    public UsuarioJpaController() {
+    }
+    
 
     public void create(Usuario usuario) throws PreexistingEntityException, Exception {
         EntityManager em = null;
@@ -140,20 +147,36 @@ public class UsuarioJpaController implements Serializable {
         }
     }
      
-    public boolean validar(String u, String p) {
-        EntityManager em = getEntityManager();
-        try {
-            Query q = em.createNamedQuery("Usuario.validar");
-            q.setParameter("logiUsua", u);
-            q.setParameter("passUsua", p);
-            List<Usuario> lista = q.getResultList();
-            if (lista.size()!=0) {
-                return true;
-            }
-            return false;
-        } finally {
-            em.close();
-        }
+   public boolean validar(String u, String p) {
+    EntityManager em = getEntityManager();
+    try {
+        String passCifrada = HashUtil.sha1(p);  // cifrar la contraseña recibida
+
+        Query q = em.createNamedQuery("Usuario.validar");
+        q.setParameter("logiUsua", u);
+        q.setParameter("passUsua", passCifrada); // pasar la contraseña cifrada
+
+        List<Usuario> lista = q.getResultList();
+        return !lista.isEmpty();
+    } finally {
+        em.close();
     }
+}
+
+    public Usuario buscarPorLogin(String login) {
+    EntityManager em = getEntityManager();
+    try {
+        TypedQuery<Usuario> q = em.createQuery("SELECT u FROM Usuario u WHERE u.logiUsua = :login", Usuario.class);
+        q.setParameter("login", login);
+        List<Usuario> lista = q.getResultList();
+        if (!lista.isEmpty()) {
+            return lista.get(0);
+        }
+        return null;
+    } finally {
+        em.close();
+    }
+}
+
     
 }

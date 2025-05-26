@@ -20,127 +20,129 @@
 
             (function (d, s, id) {
                 var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) return;
-                js = d.createElement(s); js.id = id;
+                if (d.getElementById(id))
+                    return;
+                js = d.createElement(s);
+                js.id = id;
                 js.src = "https://connect.facebook.net/en_US/sdk.js";
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
         </script>
 
-       <style>
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(to right, #e0f2ff, #f9f9f9); /* NUEVO FONDO */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background: linear-gradient(to right, #e0f2ff, #f9f9f9); /* NUEVO FONDO */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
 
-    .login-container {
-        background-color: white;
-        padding: 40px 30px;
-        border-radius: 20px;
-        box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.2);
-        text-align: center;
-        width: 100%;
-        max-width: 400px;
-    }
+            .login-container {
+                background-color: white;
+                padding: 40px 30px;
+                border-radius: 20px;
+                box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.2);
+                text-align: center;
+                width: 100%;
+                max-width: 400px;
+            }
 
-    h2 {
-        margin-bottom: 20px;
-        color: #333;
-    }
+            h2 {
+                margin-bottom: 20px;
+                color: #333;
+            }
 
-    label {
-        display: block;
-        margin-bottom: 5px;
-        text-align: left;
-        font-weight: bold;
-    }
+            label {
+                display: block;
+                margin-bottom: 5px;
+                text-align: left;
+                font-weight: bold;
+            }
 
-    input {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 15px;
-        border-radius: 10px;
-        border: 1px solid #ccc;
-        transition: border 0.3s ease;
-    }
+            input {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 15px;
+                border-radius: 10px;
+                border: 1px solid #ccc;
+                transition: border 0.3s ease;
+            }
 
-    input:focus {
-        outline: none;
-        border-color: #2575fc;
-    }
+            input:focus {
+                outline: none;
+                border-color: #2575fc;
+            }
 
-    button {
-        background-color: #2575fc;
-        color: white;
-        padding: 10px 15px;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: background-color 0.3s ease;
-        width: 100%;
-    }
+            button {
+                background-color: #2575fc;
+                color: white;
+                padding: 10px 15px;
+                border: none;
+                border-radius: 10px;
+                cursor: pointer;
+                font-size: 16px;
+                transition: background-color 0.3s ease;
+                width: 100%;
+            }
 
-    button:hover {
-        background-color: #1e60d3;
-    }
+            button:hover {
+                background-color: #1e60d3;
+            }
 
-    .google-signin, .facebook-signin {
-        margin-top: 20px;
-    }
+            .google-signin, .facebook-signin {
+                margin-top: 20px;
+            }
 
-   .facebook-custom {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Centra el contenido horizontalmente */
-    margin-top: 20px;
-    background-color: #1877f2;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
+            .facebook-custom {
+                display: flex;
+                align-items: center;
+                justify-content: center; /* Centra el contenido horizontalmente */
+                margin-top: 20px;
+                background-color: #1877f2;
+                color: white;
+                padding: 10px 15px;
+                border-radius: 10px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background-color 0.3s ease;
+            }
 
-    .full-width {
-    width: 100%;
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    margin-bottom: 15px;
-    font-size: 14px;
-}
-button.full-width {
-    background-color: #2575fc;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-* {
-    box-sizing: border-box;
-}
+            .full-width {
+                width: 100%;
+                padding: 10px;
+                border-radius: 10px;
+                border: 1px solid #ccc;
+                margin-bottom: 15px;
+                font-size: 14px;
+            }
+            button.full-width {
+                background-color: #2575fc;
+                color: white;
+                border: none;
+                cursor: pointer;
+                font-size: 16px;
+                transition: background-color 0.3s ease;
+            }
+            * {
+                box-sizing: border-box;
+            }
 
-    .facebook-custom:hover {
-        background-color: #145dbf;
-    }
+            .facebook-custom:hover {
+                background-color: #145dbf;
+            }
 
-   .facebook-custom img {
-    width: 20px;
-    height: 20px;
-    margin-left: -10px; /* 🔹 Mueve solo el ícono más a la izquierda */
-    margin-right: 10px; /* 🔹 Espacio entre ícono y texto */
-}
+            .facebook-custom img {
+                width: 20px;
+                height: 20px;
+                margin-left: -10px; /* 🔹 Mueve solo el ícono más a la izquierda */
+                margin-right: 10px; /* 🔹 Espacio entre ícono y texto */
+            }
 
-</style>
+        </style>
 
     </head>
     <body>
@@ -191,18 +193,19 @@ button.full-width {
                 let url = `logueousuario?user=${encodeURIComponent(user)}&pass=${encodeURIComponent(pass)}`;
 
                 fetch(url)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.resultado === "ok") {
-                            setCookie("token", data.token, 7);
-                            window.location.href = "clientesclave.html";
-                        } else {
-                            alert("Usuario o contraseña incorrectos");
-                        }
-                    })
-                    .catch(error => {
-                        console.error("Error al procesar la solicitud:", error);
-                    });
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.resultado === "ok") {
+                                setCookie("token", data.token, 7);
+                                
+                                window.location.href = "clientesclave.html";
+                            } else {
+                                alert("Usuario o contraseña incorrectos");
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Error al procesar la solicitud:", error);
+                        });
             });
 
             // Google Login
@@ -214,16 +217,16 @@ button.full-width {
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({id_token})
                 })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.resultado === 'ok') {
-                            setCookie("token", data.token, 7);
-                            window.location.href = "clientes.html";
-                        } else {
-                            alert('Error en login con Google');
-                        }
-                    })
-                    .catch(err => console.error(err));
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.resultado === 'ok') {
+                                setCookie("token", data.token, 7);
+                                window.location.href = "clientes.html";
+                            } else {
+                                alert('Error en login con Google');
+                            }
+                        })
+                        .catch(err => console.error(err));
             }
 
             // Facebook Login
@@ -237,19 +240,19 @@ button.full-width {
                                 body: JSON.stringify({
                                     facebook_id: userInfo.id,
                                     nombre: userInfo.name
-                                    
+
                                 })
                             })
-                                .then(res => res.json())
-                                .then(data => {
-                                    if (data.resultado === 'ok') {
-                                        setCookie("token", data.token, 7);
-                                        window.location.href = "clientes.html";
-                                    } else {
-                                        alert('Error en login con Facebook');
-                                    }
-                                })
-                                .catch(err => console.error('Error en Facebook:', err));
+                                    .then(res => res.json())
+                                    .then(data => {
+                                        if (data.resultado === 'ok') {
+                                            setCookie("token", data.token, 7);
+                                            window.location.href = "clientes.html";
+                                        } else {
+                                            alert('Error en login con Facebook');
+                                        }
+                                    })
+                                    .catch(err => console.error('Error en Facebook:', err));
                         });
                     } else {
                         alert("Inicio de sesión cancelado.");
